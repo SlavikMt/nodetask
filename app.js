@@ -23,14 +23,14 @@ const schema = {
     }
 }
 
-app.post('/testapi/:id', expressJoi(schema), function(req, res) {
+app.post('/', expressJoi(schema), function(req, res) {
     res.send('validated');
 });
 
 //error handler
 app.use(function(err, req, res, next) {
-    if (err.isBoom) {
-        return res.status(err.output.statusCode).json(err.output.payload);
+    if (err) {
+        return next(err);
     }
 });
 
